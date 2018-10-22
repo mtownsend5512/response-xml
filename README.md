@@ -46,14 +46,14 @@ $data = [
 return response()->xml($data);
 
 // Returns:
-// <?xml version="1.0"?>
-// <response>
-//     <status>success</status>
-//     <data>
-//         <first_name>John</first_name>
-//         <last_name>Smith</last_name>
-//     </data>
-// </response>
+<?xml version="1.0"?>
+<response>
+    <status>success</status>
+    <data>
+        <first_name>John</first_name>
+        <last_name>Smith</last_name>
+    </data>
+</response>
 ```
 
 ### Respond with xml from a collection or eloquent query
