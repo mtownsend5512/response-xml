@@ -107,7 +107,7 @@ The ``$xml`` argument is the data you want to be transformed into xml (may also 
 
 ``$status`` is the http code your response will send.
 
-``$headers`` is an array of key/values of http headers your response will return.
+``$headers`` is an array of key/values of http headers your response will return. A default header of ``Content-Type: application/xml`` is automatically applied, but can be overwritten.
 
 ``$xmlRoot`` will change the root xml element. Default is ``response``.
 
