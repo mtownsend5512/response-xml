@@ -135,7 +135,15 @@ This package achieves one critical goal: respond with XML as easily as you can w
 
 - Mark Townsend
 - [Spatie](https://spatie.be/)
-- All Contributors
+- [All Contributors](../../contributors)
+
+## Testing
+
+You can run the tests with:
+
+```bash
+./vendor/bin/phpunit
+```
 
 ## License
 
