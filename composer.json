@@ -7,6 +7,7 @@
         "api",
         "xml"
     ],
+    "license": "MIT",
     "authors": [
         {
             "name": "Mark Townsend",
