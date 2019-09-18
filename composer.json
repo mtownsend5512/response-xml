@@ -22,7 +22,7 @@
     },
     "require": {
         "php": "~7.0",
-        "illuminate/http": "^5.2",
+        "illuminate/http": "^5.2 || ^6.0",
         "illuminate/routing":  "^5.2 || ^6.0",
         "illuminate/support": "^5.3 || ^6.0",
         "illuminate/container": "^5.2 || ^6.0",
