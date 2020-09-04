@@ -101,7 +101,7 @@ return response()->preferredFormat($data);
 
 **Response method**
 
-``->xml($xml, $status = 200, array $headers = [], $xmlRoot = 'response')``
+``->xml($xml, $status = 200, array $headers = [], $xmlRoot = 'response', $encoding = null)``
 
 The ``$xml`` argument is the data you want to be transformed into xml (may also be a premade xml string).
 
@@ -111,9 +111,11 @@ The ``$xml`` argument is the data you want to be transformed into xml (may also 
 
 ``$xmlRoot`` will change the root xml element. Default is ``response``.
 
+``$encoding`` is a string of xml charset encoding declaration. Default is ``null``.
+
 **Response method**
 
-``->preferredFormat($data, $status = 200, array $headers = [], $xmlRoot = 'response')``
+``->preferredFormat($data, $status = 200, array $headers = [], $xmlRoot = 'response', $encoding = null)``
 
 See ``->xml()`` method arguments.
 
