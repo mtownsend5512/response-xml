@@ -35,11 +35,11 @@ class ResponseXmlServiceProvider extends ServiceProvider
      */
     protected function loadLaravelResponseMacros()
     {
-        \Illuminate\Routing\ResponseFactory::macro('xml', function ($xml, $status = 200, array $headers = [], $xmlRoot = 'response') {
+        \Illuminate\Routing\ResponseFactory::macro('xml', function ($xml, $status = 200, array $headers = [], $xmlRoot = 'response', $encoding = null) {
             if (is_array($xml)) {
-                $xml = ArrayToXml::convert($xml, $xmlRoot);
+                $xml = ArrayToXml::convert($xml, $xmlRoot, true, $encoding);
             } elseif (is_object($xml) && method_exists($xml, 'toArray')) {
-                $xml = ArrayToXml::convert($xml->toArray(), $xmlRoot);
+                $xml = ArrayToXml::convert($xml->toArray(), $xmlRoot, true, $encoding);
             } elseif (is_string($xml)) {
                 $xml = $xml;
             } else {
@@ -51,10 +51,10 @@ class ResponseXmlServiceProvider extends ServiceProvider
             return \Illuminate\Routing\ResponseFactory::make($xml, $status, $headers);
         });
 
-        \Illuminate\Routing\ResponseFactory::macro('preferredFormat', function ($data, $status = 200, array $headers = [], $xmlRoot = 'response') {
+        \Illuminate\Routing\ResponseFactory::macro('preferredFormat', function ($data, $status = 200, array $headers = [], $xmlRoot = 'response', $encoding = null) {
             $request = Container::getInstance()->make('request');
             if (Str::contains($request->headers->get('Accept'), 'xml')) {
-                return $this->xml($data, $status, array_merge($headers, ['Content-Type' => $request->headers->get('Accept')]), $xmlRoot);
+                return $this->xml($data, $status, array_merge($headers, ['Content-Type' => $request->headers->get('Accept')]), $xmlRoot, $encoding);
             } else {
                 return $this->json($data, $status, array_merge($headers, ['Content-Type' => $request->headers->get('Accept')]));
             }
@@ -67,11 +67,11 @@ class ResponseXmlServiceProvider extends ServiceProvider
      */
     protected function loadLumenResponseMacros()
     {
-        \Laravel\Lumen\Http\ResponseFactory::macro('xml', function ($xml, $status = 200, array $headers = [], $xmlRoot = 'response') {
+        \Laravel\Lumen\Http\ResponseFactory::macro('xml', function ($xml, $status = 200, array $headers = [], $xmlRoot = 'response', $encoding = null) {
             if (is_array($xml)) {
-                $xml = ArrayToXml::convert($xml, $xmlRoot);
+                $xml = ArrayToXml::convert($xml, $xmlRoot, true, $encoding);
             } elseif (is_object($xml) && method_exists($xml, 'toArray')) {
-                $xml = ArrayToXml::convert($xml->toArray(), $xmlRoot);
+                $xml = ArrayToXml::convert($xml->toArray(), $xmlRoot, true, $encoding);
             } elseif (is_string($xml)) {
                 $xml = $xml;
             } else {
@@ -83,10 +83,10 @@ class ResponseXmlServiceProvider extends ServiceProvider
             return \Laravel\Lumen\Http\ResponseFactory::make($xml, $status, $headers);
         });
 
-        \Laravel\Lumen\Http\ResponseFactory::macro('preferredFormat', function ($data, $status = 200, array $headers = [], $xmlRoot = 'response') {
+        \Laravel\Lumen\Http\ResponseFactory::macro('preferredFormat', function ($data, $status = 200, array $headers = [], $xmlRoot = 'response', $encoding = null) {
             $request = Container::getInstance()->make('request');
             if (Str::contains($request->headers->get('Accept'), 'xml')) {
-                return $this->xml($data, $status, array_merge($headers, ['Content-Type' => $request->headers->get('Accept')]), $xmlRoot);
+                return $this->xml($data, $status, array_merge($headers, ['Content-Type' => $request->headers->get('Accept')]), $xmlRoot, $encoding);
             } else {
                 return $this->json($data, $status, array_merge($headers, ['Content-Type' => $request->headers->get('Accept')]));
             }

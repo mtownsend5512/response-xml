@@ -17,6 +17,9 @@ class ResponseXml extends TestCase
     /** @test string */
     protected $testXml;
 
+    /** @test string */
+    protected $testXmlUTF8;
+
     public function setUp() : void
     {
         $this->createDummyprovider()->register();
@@ -27,6 +30,7 @@ class ResponseXml extends TestCase
             'tracking_number' => '9205590164917312751089'
         ];
         $this->testXml = '<?xml version="1.0"?><response><carrier>fedex</carrier><id>123</id><tracking_number>9205590164917312751089</tracking_number></response>';
+        $this->testXmlUTF8 = '<?xml version="1.0" encoding="UTF-8"?><response><carrier>fedex</carrier><id>123</id><tracking_number>9205590164917312751089</tracking_number></response>';
     }
 
     /**
@@ -165,5 +169,19 @@ class ResponseXml extends TestCase
         $container->instance('request', $request);
         $response = $this->createDummyResponse()->preferredFormat($this->testArray, 200);
         $this->assertEquals('application/json', $response->headers->get('Content-Type'));
+    }
+
+    /** @test */
+    public function response_sends_array_converted_to_xml_with_charset()
+    {
+        $response = $this->createDummyResponse()->xml($this->testArray, 200, $headers = [], $xmlRoot = 'response', $encoding = 'UTF-8');
+        $this->assertEquals($this->testXmlUTF8, $this->removeNewLines($response->getContent()));
+    }
+
+    /** @test */
+    public function response_sends_collection_converted_to_xml_with_charset()
+    {
+        $response = $this->createDummyResponse()->xml(new Collection($this->testArray), 200, $headers = [], $xmlRoot = 'response', $encoding = 'UTF-8');
+        $this->assertEquals($this->testXmlUTF8, $this->removeNewLines($response->getContent()));
     }
 }
