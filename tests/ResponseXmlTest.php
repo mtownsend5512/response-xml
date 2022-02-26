@@ -22,7 +22,7 @@ class ResponseXml extends TestCase
 
     public function setUp() : void
     {
-        $this->createDummyprovider()->register();
+        $this->createDummyProvider()->register();
 
         $this->testArray = [
             'carrier' => 'fedex',
@@ -70,7 +70,7 @@ class ResponseXml extends TestCase
      * Bootstrap the provider
      *
      */
-    protected function createDummyprovider(): ResponseXmlServiceProvider
+    protected function createDummyProvider(): ResponseXmlServiceProvider
     {
         $reflectionClass = new Reflect(ResponseXmlServiceProvider::class);
         return $reflectionClass->newInstanceWithoutConstructor();
